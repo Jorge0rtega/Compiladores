@@ -230,7 +230,7 @@ public class AFN {
         return this;
     }
     
-    public AFN opcional(AFN f2){
+    public AFN opcional(){
         //nuevo estado inicial
         Estado e1=new Estado();
         //nuevo estado final

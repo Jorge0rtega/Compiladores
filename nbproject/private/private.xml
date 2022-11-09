@@ -5,8 +5,12 @@
         <group>
             <file>file:/D:/ESCOM/2022-2/Compiladores/1/Compiladores/src/compiladores/ClassEstadoAnalizLexico.java</file>
             <file>file:/D:/ESCOM/2022-2/Compiladores/1/Compiladores/src/compiladores/Compiladores.java</file>
+            <file>file:/D:/ESCOM/2022-2/Compiladores/1/Compiladores/src/compiladores/AFD.java</file>
             <file>file:/D:/ESCOM/2022-2/Compiladores/1/Compiladores/src/compiladores/AFN.java</file>
             <file>file:/D:/ESCOM/2022-2/Compiladores/1/Compiladores/src/compiladores/Estado.java</file>
+            <file>file:/D:/ESCOM/2022-2/Compiladores/1/Compiladores/src/compiladores/EvaluadorExpr.java</file>
+            <file>file:/D:/ESCOM/2022-2/Compiladores/1/Compiladores/src/compiladores/AnalizLexico.java</file>
+            <file>file:/D:/ESCOM/2022-2/Compiladores/1/Compiladores/src/compiladores/ER_AFN.java</file>
         </group>
     </open-files>
 </project-private>
