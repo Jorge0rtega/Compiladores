@@ -81,7 +81,7 @@ public class ER_AFN {
         int token;
         AFN f2 = new AFN();
         token =L.yylex();
-        if(token== 10 ){//concatenar
+        if(token== 20 ){//and
             if(C(f2)){
                 f.concatenar(f2);
                 if(Tp(f)){
