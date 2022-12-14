@@ -15,6 +15,8 @@ public class Especiales {
     final char FIN=(char)0;
     final int ERORR=2000;
     final int OMITIR=2001;
+    final int ENTER=4000;
+    final int ESPACIO=3000;
 
     public char getFIN() {
         return FIN;

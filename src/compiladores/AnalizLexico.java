@@ -16,11 +16,13 @@ public class AnalizLexico {
     String cadenaSigma;
     public  String yytext; //yytext
     boolean pasoPorEdoAcept;
-    int iniLexema,finLexema, indiceCaracterActual;
+    public int iniLexema,finLexema, indiceCaracterActual;
     char caracterActual;
     Stack<Integer> pila= new Stack<Integer>();
     AFD automataAFD;
     Especiales c= new Especiales();
+    
+    
     
     public AnalizLexico(){
         cadenaSigma="";
@@ -107,6 +109,7 @@ public class AnalizLexico {
         pasoPorEdoAcept=e.pasoPorEdoAcept;
         token=e.token;
         pila=e.pila;
+        yytext=e.yytext;
         return true;
     }
     
@@ -161,8 +164,62 @@ public class AnalizLexico {
             //no hay transicion pero si tenemos edo de aceptacion
             yytext=cadenaSigma.substring(iniLexema, (finLexema+1));//iniLexema+(finLexema-iniLexema+1)
             indiceCaracterActual=finLexema+1;
-            if(token==c.getOMITIR()){//para los espacios  o tabuladores
+            if(token==c.getOMITIR()){//opcionales
                 continue;
+            }else if(token==c.ENTER){//enter
+                continue;
+//            }else if(token==c.ESPACIO){//espacio
+//                continue;
+            }else{
+                return token;
+            }
+        }
+    }
+    
+    public int yylexEspace(){
+        while (true){
+            pila.push(indiceCaracterActual);
+            if(indiceCaracterActual>=cadenaSigma.length()){
+                yytext="";
+                return c.FIN;
+            }
+            iniLexema=indiceCaracterActual;
+            edoActual=0;
+            pasoPorEdoAcept=false;
+            finLexema=-1;
+            token=-1;
+            while(indiceCaracterActual<cadenaSigma.length()){
+                caracterActual=cadenaSigma.charAt(indiceCaracterActual);
+                edoTransicion=automataAFD.TablaAFD.get(edoActual).get(caracterActual);//columna fila
+                if(edoTransicion != -1){
+                    if(automataAFD.TablaAFD.get(edoTransicion).get(256) != -1){
+                        pasoPorEdoAcept=true;
+                        token=automataAFD.TablaAFD.get(edoTransicion).get(256);
+                        finLexema=indiceCaracterActual;
+                    }
+                    indiceCaracterActual++;
+                    edoActual=edoTransicion;
+                    if(token==c.ESPACIO)
+                        break;
+                    continue;
+                }
+                break;
+            }//no existe una transicion
+            if(!pasoPorEdoAcept){
+                indiceCaracterActual=iniLexema+1;
+                yytext=cadenaSigma.substring(iniLexema, iniLexema+1);
+                token=c.getERORR();
+                return token;
+            }
+            //no hay transicion pero si tenemos edo de aceptacion
+            yytext=cadenaSigma.substring(iniLexema, (finLexema+1));//iniLexema+(finLexema-iniLexema+1)
+            indiceCaracterActual=finLexema+1;
+            if(token==c.getOMITIR()){//opcionales
+                continue;
+            }else if(token==c.ENTER){//enter
+                continue;
+//            }else if(token==c.ESPACIO){//espacio
+//                continue;
             }else{
                 return token;
             }
@@ -177,6 +234,8 @@ public class AnalizLexico {
         indiceCaracterActual=pila.pop();
         return true;
     }
+
+    
     
     
 }

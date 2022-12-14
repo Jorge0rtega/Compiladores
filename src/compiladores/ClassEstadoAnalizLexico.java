@@ -21,5 +21,6 @@ public class ClassEstadoAnalizLexico {
     String lexema;
     boolean pasoPorEdoAcept;
     int token;
+    public  String yytext; //yytext
     Stack<Integer> pila = new Stack<Integer>();
 }

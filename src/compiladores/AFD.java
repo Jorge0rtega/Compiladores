@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  * @author Jorge Ortega
  */
 public class AFD {
-    List<List<Integer>> TablaAFD=new ArrayList<List<Integer>>();//lista de listas
+    public List<List<Integer>> TablaAFD=new ArrayList<List<Integer>>();//lista de listas
     public AFD(){
         
     }
