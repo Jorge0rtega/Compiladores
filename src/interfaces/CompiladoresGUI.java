@@ -17,12 +17,13 @@ import javax.swing.JMenuItem;
  * @author Jorge Ortega
  */
 public class CompiladoresGUI extends JFrame implements ActionListener{
-    JMenu AFNs;
+    JMenu AFNs, Analisis;
     JMenuBar Menu;
     JMenuItem Basico, Unir, Concatenar, CSuma, CMul, Opcional, UnionAL, Convertir, Analizar, calculadora;
+    JMenuItem LL1;
     AFN A[];
     AFD D[];
-    int cont=0, contd=0;
+    int cont=0, contd=0, n=0;
     
     public CompiladoresGUI(){
         setLayout(null);
@@ -34,6 +35,10 @@ public class CompiladoresGUI extends JFrame implements ActionListener{
         setJMenuBar(Menu);
         AFNs = new JMenu("AFNs");
         Menu.add(AFNs);
+        Analisis = new JMenu("Analisis");
+        Menu.add(Analisis);
+        LL1 = new JMenuItem("LL1");
+        Analisis.add(LL1);
         Basico = new JMenuItem("Básico");
         AFNs.add(Basico);
         Unir = new JMenuItem("Unir");
@@ -56,6 +61,7 @@ public class CompiladoresGUI extends JFrame implements ActionListener{
         AFNs.add(Analizar);
         calculadora = new JMenuItem("Calculadora");
         AFNs.add(calculadora);
+        LL1.addActionListener(this);
         Basico.addActionListener(this);
         Unir.addActionListener(this);
         Concatenar.addActionListener(this);
@@ -145,6 +151,11 @@ public class CompiladoresGUI extends JFrame implements ActionListener{
         if(e.getSource()==calculadora){
             PCalculadora calcu = new PCalculadora(new javax.swing.JFrame(),true);
             calcu.setVisible(true);
+        }
+        if(e.getSource()==LL1){
+            PLL1 B = new PLL1(new javax.swing.JFrame(),true,n);
+            B.setVisible(true);
+            n++;
         }
     }
     

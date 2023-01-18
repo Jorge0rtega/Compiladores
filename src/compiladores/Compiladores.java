@@ -58,7 +58,7 @@ public class Compiladores {
 //        System.out.println("V= "+ EE.result);
 //        System.out.println("Post"+ EE.exprPost);//no funciona, pero no es tan necesaria
 //                
-//        Expresion regular
+////        Expresion regular
 //        AFN a =new AFN();
 //        a.CrearAFNBasico('a', 'z');
 //        AFN o =new AFN();
@@ -72,7 +72,8 @@ public class Compiladores {
 //        AFN v =new AFN();
 //        v.CrearAFNBasico('\n');//enter
 //        AFN w =new AFN();
-//        w.CrearAFNBasico('_');//enter
+//        w.CrearAFNBasico('_');
+//        
 //        a.unirAFN(o);
 //        a.unirAFN(p);
 //        a.unirAFN(q);
@@ -119,12 +120,27 @@ public class Compiladores {
 //        e1.CrearAFNBasico('-');
 //        AFN f1 =new AFN();
 //        f1.CrearAFNBasico('/');
+//        AFN g1 =new AFN();
+//        g1.CrearAFNBasico('?');
+//        AFN h1 =new AFN();
+//        h1.CrearAFNBasico(']');
+//        AFN i1 =new AFN();
+//        i1.CrearAFNBasico('[');
+//        AFN j1 =new AFN();
+//        j1.CrearAFNBasico('|');
+//        AFN k1 =new AFN();
+//        k1.CrearAFNBasico('&');
 //        a1.unirAFN(a1);
 //        a1.unirAFN(b1);      
 //        a1.unirAFN(c1);
 //        a1.unirAFN(d1);
 //        a1.unirAFN(e1);
 //        a1.unirAFN(f1);
+//        a1.unirAFN(g1);
+//        a1.unirAFN(h1);
+//        a1.unirAFN(i1);
+//        a1.unirAFN(j1);
+//        a1.unirAFN(k1);
 //        r.concatenar(a1);
 //        a.unirAFN(r);
 //        a.unirAFN(m);
@@ -183,9 +199,54 @@ public class Compiladores {
         // enter
         
         String sigma="Foca FLECHA Foca OR Foca + Foca' PC\nperror FLECHA perro OR perro - perro' PC";
-        GramGram GG=new GramGram(sigma, "GramGram", 0);
-        GG.AnalizSatGG();
-      
+        String sigma1="E FLECHA T E' PC\nE' FLECHA or T E' OR epsilon PC\nT FLECHA C T' PC\nT' FLECHA and C T' OR epsilon PC\nC FLECHA F C' PC\nC' FLECHA mas C' OR por C' OR interrogacion C' OR epsilon PC\nF FLECHA parI E ParD OR CorI Simb - Simb CorD OR Simb PC";
+        String sigma2="E FLECHA T E' PC\nE' FLECHA mas T E' OR menos T E' OR epsilon PC\nT FLECHA F T' PC\nT' FLECHA mult F T' OR div F T' OR epsilon PC\nF FLECHA ParD E ParI OR num PC";
+//        GramGram GG=new GramGram(sigma1, "GramGram", 0);
+//        GG.AnalizSatGG(); 
+//
+        LL1 LL=new LL1(sigma2, "TestLL1", 0);
+//        ArrayList<String> t = new ArrayList<>();
+//        t=LL.first(LL.GG.ArrReglas[0].nodos);
+//        System.out.println("t = " + t);
+        
+//        t=LL.follow("F");
+//        System.out.println("t = " + t);
+        LL.crearTabla();
+        
+//        ER_AFN EA = new ER_AFN("n&u&m", "ExpR", 1);
+//        EA.IniCoversion();
+//        ER_AFN E0 = new ER_AFN("i&n&t&e&r&r&o&g&a&c&i&o&n", "ExpR", 0);
+//        E0.IniCoversion();
+//        ER_AFN E1 = new ER_AFN("m&e&n&o&s", "ExpR", 2);
+//        E1.IniCoversion();
+//        ER_AFN E2 = new ER_AFN("m&a&s", "ExpR", 3);
+//        E2.IniCoversion();
+//        ER_AFN E3 = new ER_AFN("m&u&l&t", "ExpR", 4);
+//        E3.IniCoversion();
+//        ER_AFN E4 = new ER_AFN("d&i&v", "ExpR", 6);
+//        E4.IniCoversion();
+//        ER_AFN E5 = new ER_AFN("P&a&r&I", "ExpR", 7);
+//        E5.IniCoversion();
+//        ER_AFN E6 = new ER_AFN("P&a&r&D", "ExpR", 8);
+//        E6.IniCoversion();
+//        
+//        AFN test = new AFN();
+//        test.UnionEspecialANFs(EA.result, 10);
+//        test.UnionEspecialANFs(E0.result, 80);
+//        test.UnionEspecialANFs(E1.result, 20);
+//        test.UnionEspecialANFs(E2.result, 30);
+//        test.UnionEspecialANFs(E3.result, 40);
+//        test.UnionEspecialANFs(E4.result, 50);
+//        test.UnionEspecialANFs(E5.result, 60);
+//        test.UnionEspecialANFs(E6.result, 70);
+//        test.UnionEspecialANFs(E7.result, 80);
+//        test.UnionEspecialANFs(E8.result, 90);
+//        test.UnionEspecialANFs(E9.result, 100);
+//        test.ConvAFNaAFD("TestLL1");
+
+        String cadena="num mas num mult num";
+        System.out.println("LL.analizCadena(cadena) = " + LL.analizCadena(cadena));
+        
     }
-    
+     
 }

@@ -241,7 +241,6 @@ public class PAnalizLex extends javax.swing.JDialog {
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {
 
         setVisible(false);
-        System.out.println("guardar = " + guardar);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
     }

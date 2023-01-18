@@ -10,8 +10,8 @@ package compiladores;
  * @author Jorge Ortega
  */
 public class Nodo {
-    String simbolo;
-    boolean EdoTerminal;
-    int token;
+    public String simbolo;
+    public boolean EdoTerminal=false;
+    public int token;
 
 }

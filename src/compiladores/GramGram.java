@@ -17,11 +17,13 @@ public class GramGram {
     public AnalizLexico L;
     public ElemArreglo[] ArrReglas=new ElemArreglo[100];
     public int numRaglas=0;
+    public ArrayList<String> vt = new ArrayList<>();
+    public ArrayList<String> vn = new ArrayList<>();
     Especiales c= new Especiales();
     
-    public GramGram(String sigma, String fileAFD, int idAFD){
+    public GramGram(String sigma, int idAFD){
        Gramatica=sigma;
-       L=new AnalizLexico(Gramatica, fileAFD, idAFD);
+       L=new AnalizLexico(Gramatica, "GramGram", idAFD);
     }
     
     public boolean AnalizSatGG(){
@@ -29,6 +31,7 @@ public class GramGram {
         if(G()){
             token=L.yylexEspace();
             if(token==0){
+                encontrarTyNT();         
                 return true;
             }
         }
@@ -55,6 +58,9 @@ public class GramGram {
         if(token==10){//simbolo
             strLadoIzq=L.yytext;
             token=L.yylexEspace();
+            while(token==c.ESPACIO){//quitar espacios
+                token=L.yylexEspace();
+            }
             while(token==10){//tomar la plabra completa
                 strLadoIzq=strLadoIzq + L.yytext;
                 token=L.yylexEspace();
@@ -65,6 +71,9 @@ public class GramGram {
             if(token==20){//flecha
                 if(listaLadosDerechos(strLadoIzq)){
                     token=L.yylexEspace();
+                    while(token==c.ESPACIO){//quitar espacios
+                        token=L.yylexEspace();
+                    }
                     if(token==30){//PC
                         return true;
                     }
@@ -117,7 +126,7 @@ public class GramGram {
     
     private boolean ladoDerecho(String strLadoIzq) {
         int token;
-        List<Nodo> l=new ArrayList<Nodo>();
+        ArrayList<Nodo> l=new ArrayList<Nodo>();
         Nodo nodo=new Nodo();
         token=L.yylexEspace();
         while(token==c.ESPACIO){//quitar espacios
@@ -167,6 +176,26 @@ public class GramGram {
         L.UndoToken();
         return true;
     }
-
+    private void encontrarTyNT(){
+        //encuentra los no terminales
+        for(int i=0; ArrReglas[i]!=null;i++){
+            if(!vn.contains(ArrReglas[i].ladoI)){//aun no esta en los no terminales
+                vn.add(ArrReglas[i].ladoI);
+            }        
+        }
+        //encuentra los terminales para el arreglo
+        
+        for(int i=0; ArrReglas[i]!=null;i++)
+            for(int j=0; j<ArrReglas[i].nodos.size();j++){
+                    if(!vn.contains(ArrReglas[i].nodos.get(j).simbolo)){//no esta en los no terminales
+                        ArrReglas[i].nodos.get(j).EdoTerminal=true;
+                        if(!vt.contains(ArrReglas[i].nodos.get(j).simbolo)){//aun no esta en los terminales
+                            vt.add(ArrReglas[i].nodos.get(j).simbolo);
+                        }
+                    }
+                         
+            }
+        vt.remove(vt.indexOf("epsilon"));
+    }
     
 }
